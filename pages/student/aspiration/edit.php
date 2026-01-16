@@ -1,19 +1,24 @@
 <?php
-require '../../../includes/auth_check.php';
-require '../../../config/db.php';
+require_once __DIR__ . '/../../../includes/auth_check.php';
+require_once __DIR__ . '/../../../config/db.php';
 
-$id = $_GET['id'];
+$id = (int)$_GET['id'];
+$user_id = $_SESSION['user_id'];
 
-$stmt = $pdo->prepare("
+$stmt = $conn->prepare("
     SELECT * FROM aspirations
     WHERE id = ? AND user_id = ? AND status = 'Terkirim'
 ");
-$stmt->execute([$id, $_SESSION['user_id']]);
-$data = $stmt->fetch();
+$stmt->bind_param("ii", $id, $user_id);
+$stmt->execute();
+$result = $stmt->get_result();
+$data = $result->fetch_assoc();
 
-if (!$data) die("Aspirasi tidak bisa diedit.");
-
-$categories = $pdo->query("SELECT * FROM categories")->fetchAll();
+if (!$data) {
+    die("Aspirasi tidak bisa diedit.");
+}
+$result = $conn->query("SELECT * FROM categories ORDER BY name ASC");
+$categories = $result->fetch_all(MYSQLI_ASSOC);
 ?>
 
 <?php include '../../../includes/header.php'; ?>
@@ -33,7 +38,7 @@ $categories = $pdo->query("SELECT * FROM categories")->fetchAll();
             <?php foreach ($categories as $c): ?>
                 <option value="<?= $c['id'] ?>"
                     <?= $c['id'] == $data['category_id'] ? 'selected' : '' ?>>
-                    <?= $c['name'] ?>
+                    <?= htmlspecialchars($c['name']) ?>
                 </option>
             <?php endforeach; ?>
         </select>

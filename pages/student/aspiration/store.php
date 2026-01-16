@@ -2,7 +2,7 @@
 require '../../../includes/auth_check.php';
 require '../../../config/db.php';
 
-$stmt = $pdo->prepare("
+$stmt = $conn->prepare("
     INSERT INTO aspirations (user_id, category_id, title, description)
     VALUES (?, ?, ?, ?)
 ");

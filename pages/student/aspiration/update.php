@@ -2,7 +2,7 @@
 require '../../../includes/auth_check.php';
 require '../../../config/db.php';
 
-$stmt = $pdo->prepare("
+$stmt = $conn->prepare("
     UPDATE aspirations
     SET title = ?, category_id = ?, description = ?, updated_at = NOW()
     WHERE id = ? AND user_id = ? AND status = 'Terkirim'

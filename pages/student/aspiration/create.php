@@ -2,7 +2,12 @@
 require '../../../includes/auth_check.php';
 require '../../../config/db.php';
 
-$categories = $pdo->query("SELECT * FROM categories")->fetchAll();
+$stmt = $conn->prepare("
+    SELECT * FROM categories
+");
+$stmt->execute();
+$result = $stmt->get_result();
+$categories = $result->fetch_all(MYSQLI_ASSOC);
 ?>
 
 <?php include '../../../includes/header.php'; ?>
