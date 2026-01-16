@@ -1,12 +1,19 @@
 <?php
+$host = "localhost";
+$db   = "aspirasi_db";
+$user = "root";
+$pass = "genta";
 
-$db_host = "localhost";
-$db_user = "root";
-$db_pass = "genta";
-$db_name = "aspirasi_db";
-
-$conn = new mysqli($db_host, $db_user, $db_pass, $db_name);
-
-if ($conn->connect_error) {
-    die("Database connection failed: " . $conn->connect_error);
+try {
+    $pdo = new PDO(
+        "mysql:host=$host;dbname=$db;charset=utf8",
+        $user,
+        $pass,
+        [
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+        ]
+    );
+} catch (PDOException $e) {
+    die("Koneksi gagal: " . $e->getMessage());
 }
