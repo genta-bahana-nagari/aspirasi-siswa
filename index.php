@@ -22,7 +22,7 @@
                 <li class="nav-item"><a class="nav-link" href="#fitur">Fitur</a></li>
                 <li class="nav-item"><a class="nav-link" href="#alur">Alur</a></li>
                 <li class="nav-item">
-                    <a class="btn btn-light btn-sm ms-2" href="auth/login.php">Login</a>
+                    <a class="btn btn-light btn-sm mt-1 " href="auth/login.php">Login</a>
                 </li>
             </ul>
         </div>
