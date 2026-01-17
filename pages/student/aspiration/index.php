@@ -47,16 +47,16 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
             </tr>
         </thead>
         <tbody>
-        <?php foreach ($data as $a): ?>
+        <?php foreach ($data as $a => $i): ?>
             <tr>
-                <td class="p-2 border"><?= $i + 1 ?></td>
-                <td class="p-2 border"><?= $a['kategori'] ?></td>
-                <td class="p-2 border"><?= htmlspecialchars($a['title']) ?></td>
-                <td class="p-2 border"><?= htmlspecialchars($a['description']) ?></td>
-                <td class="p-2 border"><?= date('d-m-Y', strtotime($a['created_at'])) ?></td>
-                <td class="p-2 border font-semibold"><?= $a['status'] ?></td>
+                <td class="p-2 border"><?= $a + 1 ?></td>
+                <td class="p-2 border"><?= $i['kategori'] ?></td>
+                <td class="p-2 border"><?= htmlspecialchars($i['title']) ?></td>
+                <td class="p-2 border"><?= htmlspecialchars($i['description']) ?></td>
+                <td class="p-2 border"><?= date('d-m-Y', strtotime($i['created_at'])) ?></td>
+                <td class="p-2 border font-semibold"><?= $i['status'] ?></td>
                 <td class="p-2 border text-center">
-                    <?php if ($a['status'] === 'Terkirim'): ?>
+                    <?php if ($i['status'] === 'Terkirim'): ?>
                         <a href="edit.php?id=<?= $a['id'] ?>"
                            class="text-blue-600">Edit</a>
                     <?php else: ?>

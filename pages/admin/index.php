@@ -13,6 +13,7 @@ $stmt = $conn->prepare("
     JOIN users u ON a.user_id = u.id
     JOIN categories c ON a.category_id = c.id
     ORDER BY a.created_at DESC
+    LIMIT 5
 ");
 
 $stmt->execute();
