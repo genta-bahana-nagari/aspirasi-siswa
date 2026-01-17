@@ -79,8 +79,13 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
                                 </td>
                                 <td class="text-center">
                                     <?php if ($a['status'] === 'Terkirim'): ?>
-                                        <a href="edit.php?id=<?= $a['id'] ?>" class="btn btn-sm btn-outline-primary">
+                                        <a href="edit.php?id=<?= $a['id'] ?>" class="btn btn-sm btn-outline-primary me-1">
                                             Edit
+                                        </a>
+                                        <a href="delete.php?id=<?= $a['id'] ?>"
+                                        onclick="return confirm('Yakin ingin menghapus aspirasi ini?');"
+                                        class="btn btn-sm btn-danger">
+                                            Hapus
                                         </a>
                                     <?php else: ?>
                                         <span class="text-muted">—</span>
