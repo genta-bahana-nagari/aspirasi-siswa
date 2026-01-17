@@ -40,36 +40,71 @@ Aplikasi ini bertujuan untuk meningkatkan transparansi, efektivitas, dan komunik
 - **Web Server**: Apache (XAMPP / Laragon)
 - **Version Control**: Git
 
+### Catatan:
+- *Kalau kamu ingin mendownload proyek ini di Windows dan akan mengujinya dengan Laragon atau XAMPP, pastikan anda taruh di:*
+
+*C:\laragon\www\aspirasi-siswa*
+
 ---
 
 ## 📁 Struktur Folder
 ```
 aspirasi-siswa/
 │
-├── config/
-│ └── db.php
-│
 ├── auth/
-│ ├── login.php
-│ ├── register.php
-│ └── logout.php
+│   ├── login.php               # Halaman login
+│   ├── register.php            # Halaman registrasi
+│   └── logout.php              # Logout
+│
+├── config/
+│   └── db.php                  # Konfigurasi database
+│   └── app.php                 # Konfigurasi dasar aplikasi (untuk navigasi)
+│
+├── includes/
+│   └── auth_check.php          # Konfigurasi autentikasi
+│   └── footer.php              # Footer
+│   └── header.php              # Header
+│   └── sidebar.php             # Sidebar
 │
 ├── pages/
-│ ├── admin/
-│ │   ├──index.php ==> Dashboard Utama
-│ │   ├──aspirasi/...
-│ │   ├──kategori/...
-│ │   ├──feedback/...
-│ │   └──pengguna/...
-│ │
-│ └── siswa/
-│     ├──index.php ==> Dashboard Utama
-│     ├──aspirasi/...
-│     └──histori/...
-│  
-├── assets/
-│ ├── css/
-│ └── js/
+│   ├── admin/                  # Halaman dan modul admin
+│   │   ├── index.php           # Dashboard utama admin
+│   │   │
+│   │   ├── aspirasi/           # Modul Aspirasi
+│   │   │   ├── index.php
+│   │   │   ├── create.php
+│   │   │   └── edit.php
+│   │   │
+│   │   ├── kategori/           # Modul Kategori
+│   │   │   ├── index.php
+│   │   │   ├── create.php
+│   │   │   └── edit.php
+│   │   │
+│   │   ├── feedback/           # Modul Feedback (opsional)
+│   │   │   └── ...
+│   │   │
+│   │   └── pengguna/           # Modul Pengguna / Siswa
+│   │       ├── index.php
+│   │       ├── create.php
+│   │       └── edit.php
+│   │
+│   └── siswa/                  # Halaman dan modul siswa
+│       ├── index.php           # Dashboard utama siswa
+│       │
+│       ├── aspirasi/           # Modul Aspirasi siswa
+│       │   ├── index.php
+│       │   ├── create.php
+│       │   └── edit.php
+│       │
+│       └── histori/            # Riwayat aspirasi siswa
+│           └── index.php
+│
+├── assets/                     # File statis
+│   ├── css/
+│   │   └── style.css
+│   │
+│   └── js/
+│       └── script.js
 │
 └── README.md
 ```
