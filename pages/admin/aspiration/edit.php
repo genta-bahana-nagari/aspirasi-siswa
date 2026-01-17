@@ -11,47 +11,59 @@ $statuses = [
 
 $id = (int)$_GET['id'];
 
-$stmt = $conn->prepare("
-    SELECT * FROM aspirations
-    WHERE id = ?
-");
-
+$stmt = $conn->prepare("SELECT * FROM aspirations WHERE id = ?");
 $stmt->bind_param("i", $id);
 $stmt->execute();
 $result = $stmt->get_result();
 $data = $result->fetch_assoc();
 
 if (!$data) {
-    die("Aspirasi tidak bisa diedit.");
+    die("Aspirasi tidak ditemukan.");
 }
 ?>
 
 <?php include '../../../includes/header.php'; ?>
 <?php include '../../../includes/sidebar.php'; ?>
 
-<div class="p-6 max-w-xl">
-    <h1 class="text-2xl font-bold mb-4">Edit Aspirasi</h1>
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
 
-    <form action="update.php" method="POST" class="space-y-4">
-        <input type="hidden" name="id" value="<?= $data['id'] ?>">
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-white fw-bold">
+                    Edit Status Aspirasi
+                </div>
 
-        <div>
-            <label class="block mb-1 font-semibold">Status</label>
-            <select name="status" required
-                    class="w-full border p-2 rounded">
-                <?php foreach ($statuses as $status): ?>
-                    <option value="<?= $status ?>"
-                        <?= ($data['status'] === $status) ? 'selected' : '' ?>>
-                        <?= $status ?>
-                    </option>
-                <?php endforeach; ?>
-            </select>
+                <div class="card-body">
+                    <form action="update.php" method="POST">
+                        <input type="hidden" name="id" value="<?= $data['id'] ?>">
+
+                        <div class="mb-3">
+                            <label class="form-label">Status Aspirasi</label>
+                            <select name="status" class="form-select" required>
+                                <?php foreach ($statuses as $status): ?>
+                                    <option value="<?= $status ?>"
+                                        <?= ($data['status'] === $status) ? 'selected' : '' ?>>
+                                        <?= $status ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+
+                        <div class="d-flex justify-content-between">
+                            <a href="index.php" class="btn btn-secondary">
+                                Kembali
+                            </a>
+                            <button type="submit" class="btn btn-primary">
+                                Update Status
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
         </div>
-
-        <button class="bg-blue-600 text-white px-4 py-2 rounded">
-            Update
-        </button>
-    </form>
+    </div>
 </div>
 
 <?php include '../../../includes/footer.php'; ?>
