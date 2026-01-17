@@ -1,6 +1,11 @@
 <?php
-$protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
-define('BASE_URL', $protocol . '://' . $_SERVER['HTTP_HOST'] . '/aspirasi-siswa');
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
-$role = $_SESSION['role'] ?? 'siswa';  
-$base = BASE_URL . '/pages/' . $role;
+$protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
+    ? 'https'
+    : 'http';
+
+define('BASE_URL', $protocol . '://' . $_SERVER['HTTP_HOST'] . '/aspirasi-siswa');
+define('BASE_PATH', realpath(__DIR__ . '/..'));
