@@ -49,8 +49,8 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
                                 <th>Judul</th>
                                 <th>Deskripsi</th>
                                 <th style="width:130px;">Tanggal</th>
-                                <th style="width:140px;">Status</th>
-                                <th style="width:90px;" class="text-center">Aksi</th>
+                                <th style="width:120px;">Status</th>
+                                <th style="width:200px;" class="text-center">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -78,22 +78,42 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
                                     <span class="badge bg-<?= $badge ?>"><?= $a['status'] ?></span>
                                 </td>
                                 <td class="text-center">
-                                    <?php if ($a['status'] === 'Terkirim'): ?>
-                                        <a href="edit.php?id=<?= $a['id'] ?>" class="btn btn-sm btn-outline-primary me-1">
-                                            Edit
+                                    <div class="btn-group" role="group" aria-label="Aksi Aspirasi">
+                                        <a href="detail.php?id=<?= $a['id'] ?>" 
+                                        class="btn btn-sm btn-info" 
+                                        title="Lihat Detail">
+                                            <i class="bi bi-eye"></i>
                                         </a>
-                                        <a href="delete.php?id=<?= $a['id'] ?>"
+
+                                        <?php if ($a['status'] === 'Terkirim'): ?>
+                                        <a href="edit.php?id=<?= $a['id'] ?>" 
+                                        class="btn btn-sm btn-warning" 
+                                        title="Edit Aspirasi">
+                                            <i class="bi bi-pencil-square"></i>
+                                        </a>
+                                        <?php else: ?>
+                                        <button class="btn btn-sm btn-warning disabled" title="Tidak bisa diedit">
+                                            <i class="bi bi-pencil-square"></i>
+                                        </button>
+                                        <?php endif; ?>
+
+                                        <?php if ($a['status'] === 'Terkirim'): ?>
+                                        <a href="delete.php?id=<?= $a['id'] ?>" 
                                         onclick="return confirm('Yakin ingin menghapus aspirasi ini?');"
-                                        class="btn btn-sm btn-danger">
-                                            Hapus
+                                        class="btn btn-sm btn-danger" 
+                                        title="Hapus Aspirasi">
+                                            <i class="bi bi-trash"></i>
                                         </a>
-                                    <?php else: ?>
-                                        <span class="text-muted">—</span>
-                                    <?php endif; ?>
+                                        <?php else: ?>
+                                        <button class="btn btn-sm btn-danger disabled" title="Tidak bisa dihapus">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                        <?php endif; ?>
+                                    </div>
                                 </td>
                             </tr>
                             <?php endforeach; ?>
-    
+
                             <?php if (empty($data)): ?>
                             <tr>
                                 <td colspan="7" class="text-center text-muted py-4">
@@ -103,6 +123,7 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
                             <?php endif; ?>
                         </tbody>
                     </table>
+
                 </div>
             </div>
         </div>
