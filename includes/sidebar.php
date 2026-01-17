@@ -15,11 +15,15 @@ $base = $role === 'admin' ? '/aspirasi-siswa/pages/admin' : '/aspirasi-siswa/pag
     ?>
 
     <a href="<?=  $base ?>/index.php ?>" class="<?= active('<?=  $base ?>/index.php ?>') ?>">Dashboard</a>
+    <?php if ($role === 'admin'): ?>
+        <a href="<?=  $base ?>/category/index.php ?>" class="<?=  $base ?>/category/index.php ?>">Kategori Aspirasi</a>
+    <?php endif; ?>
+    
     <a href="<?=  $base ?>/aspiration/index.php ?>" class="<?= active('<?=  $base ?>/aspiration/index.php ?>') ?>">Aspirasi</a>
+    
     <a href="<?=  $base ?>/history/index.php ?>" class="<?= active('<?=  $base ?>/history/index.php ?>') ?>">Histori</a>
     
     <?php if ($role === 'admin'): ?>
-        <a href="<?=  $base ?>/category/index.php ?>" class="<?=  $base ?>/category/index.php ?>">Kategori Aspirasi</a>
         <a href="<?=  $base ?>/user/index.php ?>" class="<?= active('<?=  $base ?>/user/index.php ?>') ?>">Pengguna</a>
     <?php endif; ?>
 
