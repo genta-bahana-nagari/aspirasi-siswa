@@ -24,7 +24,7 @@ $base = $role === 'admin' ? '/aspirasi-siswa/pages/admin' : '/aspirasi-siswa/pag
     <a href="<?=  $base ?>/history/index.php ?>" class="<?= active('<?=  $base ?>/history/index.php ?>') ?>">Histori</a>
     
     <?php if ($role === 'admin'): ?>
-        <a href="<?=  $base ?>/user/index.php ?>" class="<?= active('<?=  $base ?>/user/index.php ?>') ?>">Pengguna</a>
+        <a href="<?=  $base ?>/user/index.php ?>" class="<?= active('<?=  $base ?>/student-user/index.php ?>') ?>">Siswa</a>
     <?php endif; ?>
 
     <div class="text-center mt-4">

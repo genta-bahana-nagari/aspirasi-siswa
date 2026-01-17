@@ -30,7 +30,7 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
 
     <!-- Dashboard Cards -->
     <div class="row g-4 mb-4">
-        <div class="col-md-3 col-sm-6">
+        <div class="col-md-4 col-sm-6">
             <div class="card text-white bg-primary h-100">
                 <div class="card-body d-flex justify-content-between align-items-center">
                     <div>
@@ -40,11 +40,11 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
                     <i class="bi bi-people-fill fs-1"></i>
                 </div>
                 <div class="card-footer bg-primary-light text-white">
-                    <a href="#" class="text-white text-decoration-none">View Students →</a>
+                    <a href="student-user/index.php" class="text-white text-decoration-none">View Students →</a>
                 </div>
             </div>
         </div>
-        <div class="col-md-3 col-sm-6">
+        <div class="col-md-4 col-sm-6">
             <div class="card text-white bg-success h-100">
                 <div class="card-body d-flex justify-content-between align-items-center">
                     <div>
@@ -54,11 +54,11 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
                     <i class="bi bi-tags-fill fs-1"></i>
                 </div>
                 <div class="card-footer bg-success-light text-white">
-                    <a href="categories/index.php" class="text-white text-decoration-none">Manage Categories →</a>
+                    <a href="category/index.php" class="text-white text-decoration-none">Manage Categories →</a>
                 </div>
             </div>
         </div>
-        <div class="col-md-3 col-sm-6">
+        <div class="col-md-4 col-sm-6">
             <div class="card text-white bg-warning h-100">
                 <div class="card-body d-flex justify-content-between align-items-center">
                     <div>
@@ -68,21 +68,7 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
                     <i class="bi bi-hourglass-split fs-1"></i>
                 </div>
                 <div class="card-footer bg-warning-light text-white">
-                    <a href="aspirations/index.php" class="text-white text-decoration-none">View Aspirations →</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3 col-sm-6">
-            <div class="card text-white bg-danger h-100">
-                <div class="card-body d-flex justify-content-between align-items-center">
-                    <div>
-                        <h5 class="card-title">Issues Reported</h5>
-                        <h3 class="card-text">3</h3>
-                    </div>
-                    <i class="bi bi-exclamation-triangle-fill fs-1"></i>
-                </div>
-                <div class="card-footer bg-danger-light text-white">
-                    <a href="issues/index.php" class="text-white text-decoration-none">View Issues →</a>
+                    <a href="aspiration/index.php" class="text-white text-decoration-none">View Aspirations →</a>
                 </div>
             </div>
         </div>
