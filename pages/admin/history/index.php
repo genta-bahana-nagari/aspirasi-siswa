@@ -2,8 +2,12 @@
 <?php include "../../../includes/sidebar.php"; ?>
 
 <div class="main">
-    <h3>Halaman Riwayat Aspirasi</h3>
-    <p>Use the sidebar to navigate between CRUD pages.</p>
+    <div class="container-fluid py-4">
+        <div class="mb-4">
+            <h1 class="h3">Halaman Riwayat Aspirasi</h1>
+            <p>Use the sidebar to navigate between CRUD pages.</p>
+        </div>
+    </div>
 </div>
 
 <?php include "../../../includes/footer.php"; ?>

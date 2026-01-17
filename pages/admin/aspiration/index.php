@@ -67,11 +67,12 @@ $kategoriList = $conn->query("SELECT id, name FROM categories ORDER BY name")->f
 <?php include '../../../includes/sidebar.php'; ?>
 
 <div class="main">
-    <div class="container-fluid">
+    <div class="container-fluid py-4">
 
         <!-- Header -->
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <h3 class="fw-bold mb-0">Daftar Aspirasi Siswa</h3>
+        <div class="mb-4">
+            <h1 class="h3">Daftar Aspirasi</h1>
+            <p>Atur semua aspirasi siswa disini.</p>
         </div>
 
         <div class="card shadow-sm border-0 mb-4">

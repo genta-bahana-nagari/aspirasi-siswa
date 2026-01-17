@@ -26,10 +26,15 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
     
         <!-- Page Header -->
         <div class="d-flex justify-content-between align-items-center mb-4">
-            <h3 class="fw-bold mb-0">Aspirasi Saya</h3>
-            <a href="create.php" class="btn btn-primary">
-                <i class="bi bi-plus-lg"></i> Kirim Aspirasi
-            </a>
+            <div>
+                <h1 class="h3">Aspirasi Saya</h1>
+                <p class="text-muted">Daftar aspirasi yang sudah diajukan.</p>
+            </div>
+            <div>
+                <a href="create.php" class="btn btn-primary">
+                    <i class="bi bi-plus-lg"></i> Kirim Aspirasi
+                </a>
+            </div>
         </div>
     
         <!-- Table Card -->
