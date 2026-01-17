@@ -13,29 +13,58 @@ $categories = $result->fetch_all(MYSQLI_ASSOC);
 <?php include '../../../includes/header.php'; ?>
 <?php include '../../../includes/sidebar.php'; ?>
 
-<div class="p-6 max-w-xl">
-    <h1 class="text-2xl font-bold mb-4">Kirim Aspirasi</h1>
+<div class="container-fluid py-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
 
-    <form action="store.php" method="POST" class="space-y-4">
-        <input type="text" name="title" required
-               placeholder="Judul Aspirasi"
-               class="w-full border p-2 rounded">
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-white fw-bold">
+                    <?= isset($data) ? 'Edit Aspirasi' : 'Kirim Aspirasi' ?>
+                </div>
 
-        <select name="category_id" required class="w-full border p-2 rounded">
-            <option value="">Pilih Kategori</option>
-            <?php foreach ($categories as $c): ?>
-                <option value="<?= $c['id'] ?>"><?= $c['name'] ?></option>
-            <?php endforeach; ?>
-        </select>
+                <div class="card-body">
+                    <form action="<?= isset($data) ? 'update.php' : 'store.php' ?>" method="POST" class="space-y-3">
+                        <?php if (isset($data)): ?>
+                            <input type="hidden" name="id" value="<?= $data['id'] ?>">
+                        <?php endif; ?>
 
-        <textarea name="description" required
-                  placeholder="Deskripsi Aspirasi"
-                  class="w-full border p-2 rounded"></textarea>
+                        <div class="mb-3">
+                            <label class="form-label">Judul Aspirasi</label>
+                            <input type="text" name="title" required
+                                   value="<?= $data['title'] ?? '' ?>"
+                                   class="form-control">
+                        </div>
 
-        <button class="bg-blue-600 text-white px-4 py-2 rounded">
-            Kirim
-        </button>
-    </form>
+                        <div class="mb-3">
+                            <label class="form-label">Kategori</label>
+                            <select name="category_id" required class="form-select">
+                                <option value="">Pilih Kategori</option>
+                                <?php foreach ($categories as $c): ?>
+                                    <option value="<?= $c['id'] ?>"
+                                        <?= isset($data) && $c['id'] == $data['category_id'] ? 'selected' : '' ?>>
+                                        <?= htmlspecialchars($c['name']) ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Deskripsi</label>
+                            <textarea name="description" required class="form-control" rows="5"><?= $data['description'] ?? '' ?></textarea>
+                        </div>
+
+                        <div class="d-flex justify-content-between">
+                            <a href="index.php" class="btn btn-secondary">Kembali</a>
+                            <button type="submit" class="btn btn-primary">
+                                <?= isset($data) ? 'Update' : 'Kirim' ?>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
 </div>
 
 <?php include '../../../includes/footer.php'; ?>

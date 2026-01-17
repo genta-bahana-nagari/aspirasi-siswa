@@ -21,52 +21,81 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
 <?php include '../../../includes/header.php'; ?>
 <?php include '../../../includes/sidebar.php'; ?>
 
-<div class="p-6">
-    <h1 class="text-2xl font-bold mb-4">Aspirasi Saya</h1>
+<div class="container-fluid py-4">
 
-    <div class="flex justify-end mb-4">
-        <a href="create.php"
-        class="inline-flex items-center gap-2
-                bg-blue-600 hover:bg-blue-700
-                text-white px-4 py-2 rounded shadow">
-            <span class="text-lg">+</span>
-            <span>Kirim Aspirasi</span>
+    <!-- Page Header -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h3 class="fw-bold mb-0">Aspirasi Saya</h3>
+        <a href="create.php" class="btn btn-primary">
+            <i class="bi bi-plus-lg"></i> Kirim Aspirasi
         </a>
     </div>
 
-    <table class="w-full bg-white border mt-4">
-        <thead class="bg-gray-100">
-            <tr>
-                <th class="p-2 border">No.</th>
-                <th class="p-2 border">Kategori</th>
-                <th class="p-2 border">Judul</th>
-                <th class="p-2 border">Deskripsi</th>
-                <th class="p-2 border">Tanggal</th>
-                <th class="p-2 border">Status</th>
-                <th class="p-2 border">Aksi</th>
-            </tr>
-        </thead>
-        <tbody>
-        <?php foreach ($data as $a => $i): ?>
-            <tr>
-                <td class="p-2 border"><?= $a + 1 ?></td>
-                <td class="p-2 border"><?= $i['kategori'] ?></td>
-                <td class="p-2 border"><?= htmlspecialchars($i['title']) ?></td>
-                <td class="p-2 border"><?= htmlspecialchars($i['description']) ?></td>
-                <td class="p-2 border"><?= date('d-m-Y', strtotime($i['created_at'])) ?></td>
-                <td class="p-2 border font-semibold"><?= $i['status'] ?></td>
-                <td class="p-2 border text-center">
-                    <?php if ($i['status'] === 'Terkirim'): ?>
-                        <a href="edit.php?id=<?= $a['id'] ?>"
-                           class="text-blue-600">Edit</a>
-                    <?php else: ?>
-                        <span class="text-gray-400">—</span>
-                    <?php endif; ?>
-                </td>
-            </tr>
-        <?php endforeach; ?>
-        </tbody>
-    </table>
+    <!-- Table Card -->
+    <div class="card shadow-sm border-0">
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th style="width:60px;">No</th>
+                            <th>Kategori</th>
+                            <th>Judul</th>
+                            <th>Deskripsi</th>
+                            <th style="width:130px;">Tanggal</th>
+                            <th style="width:140px;">Status</th>
+                            <th style="width:90px;" class="text-center">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($data as $i => $a): ?>
+                        <tr>
+                            <td><?= $i + 1 ?></td>
+                            <td><?= htmlspecialchars($a['kategori']) ?></td>
+                            <td><?= htmlspecialchars($a['title']) ?></td>
+                            <td class="text-muted"><?= htmlspecialchars($a['description']) ?></td>
+                            <td>
+                                <span class="badge bg-secondary">
+                                    <?= date('d-m-Y', strtotime($a['created_at'])) ?>
+                                </span>
+                            </td>
+                            <td>
+                                <?php
+                                $badge = match ($a['status']) {
+                                    'Terkirim' => 'secondary',
+                                    'Diproses' => 'primary',
+                                    'Dalam Perbaikan' => 'warning',
+                                    'Selesai' => 'success',
+                                    default => 'dark'
+                                };
+                                ?>
+                                <span class="badge bg-<?= $badge ?>"><?= $a['status'] ?></span>
+                            </td>
+                            <td class="text-center">
+                                <?php if ($a['status'] === 'Terkirim'): ?>
+                                    <a href="edit.php?id=<?= $a['id'] ?>" class="btn btn-sm btn-outline-primary">
+                                        Edit
+                                    </a>
+                                <?php else: ?>
+                                    <span class="text-muted">—</span>
+                                <?php endif; ?>
+                            </td>
+                        </tr>
+                        <?php endforeach; ?>
+
+                        <?php if (empty($data)): ?>
+                        <tr>
+                            <td colspan="7" class="text-center text-muted py-4">
+                                Belum ada aspirasi
+                            </td>
+                        </tr>
+                        <?php endif; ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
 </div>
 
 <?php include '../../../includes/footer.php'; ?>
