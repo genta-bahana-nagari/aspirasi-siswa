@@ -18,40 +18,42 @@ if (!$data) {
 <?php include '../../../includes/header.php'; ?>
 <?php include '../../../includes/sidebar.php'; ?>
 
-<div class="container-fluid">
-    <div class="row justify-content-center">
-        <div class="col-lg-6">
-
-            <div class="card shadow-sm border-0">
-                <div class="card-header bg-white fw-bold">
-                    Edit Kategori
+<div class="main">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+    
+                <div class="card shadow-sm border-0">
+                    <div class="card-header bg-white fw-bold">
+                        Edit Kategori
+                    </div>
+    
+                    <div class="card-body">
+                        <form action="update.php" method="POST">
+                            <input type="hidden" name="id" value="<?= $data['id'] ?>">
+    
+                            <div class="mb-3">
+                                <label class="form-label">Nama Kategori</label>
+                                <input type="text"
+                                       name="name"
+                                       value="<?= htmlspecialchars($data['name']) ?>"
+                                       class="form-control"
+                                       required>
+                            </div>
+    
+                            <div class="d-flex justify-content-between">
+                                <a href="index.php" class="btn btn-secondary">
+                                    Kembali
+                                </a>
+                                <button type="submit" class="btn btn-primary">
+                                    Update
+                                </button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-
-                <div class="card-body">
-                    <form action="update.php" method="POST">
-                        <input type="hidden" name="id" value="<?= $data['id'] ?>">
-
-                        <div class="mb-3">
-                            <label class="form-label">Nama Kategori</label>
-                            <input type="text"
-                                   name="name"
-                                   value="<?= htmlspecialchars($data['name']) ?>"
-                                   class="form-control"
-                                   required>
-                        </div>
-
-                        <div class="d-flex justify-content-between">
-                            <a href="index.php" class="btn btn-secondary">
-                                Kembali
-                            </a>
-                            <button type="submit" class="btn btn-primary">
-                                Update
-                            </button>
-                        </div>
-                    </form>
-                </div>
+    
             </div>
-
         </div>
     </div>
 </div>

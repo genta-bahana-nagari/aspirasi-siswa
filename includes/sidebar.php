@@ -1,37 +1,62 @@
 <?php
-$role = $_SESSION['role'];
-$base = $role === 'admin' ? '/aspirasi-siswa/pages/admin' : '/aspirasi-siswa/pages/student';
+if (!defined('BASE_URL')) {
+    require_once __DIR__ . '/../config/app.php';
+}
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+$role = $_SESSION['role'] ?? 'student';
+
+$base = ($role === 'admin')
+    ? BASE_URL . '/pages/admin'
+    : BASE_URL . '/pages/student';
+
+$current_path = $_SERVER['PHP_SELF'];
+
+function activePath($path)
+{
+    global $current_path;
+    return str_contains($current_path, $path) ? 'active' : '';
+}
 ?>
 
 <div class="sidebar">
     <h5 class="text-center mb-4"><?= ucfirst($role) ?> Menu</h5>
 
-    <?php
-    $current_page = basename($_SERVER['PHP_SELF']);
-    function active($page) {
-        global $current_page;
-        return $current_page === $page ? 'active' : '';
-    }
-    ?>
+    <a href="<?= $base ?>/index.php">
+        Dashboard
+    </a>
 
-    <a href="<?=  $base ?>/index.php ?>" class="<?= active('<?=  $base ?>/index.php ?>') ?>">Dashboard</a>
     <?php if ($role === 'admin'): ?>
-        <a href="<?=  $base ?>/category/index.php ?>" class="<?=  $base ?>/category/index.php ?>">Kategori Aspirasi</a>
+        <a href="<?= $base ?>/category/index.php"
+           class="<?= activePath('/category/') ?>">
+            Kategori Aspirasi
+        </a>
     <?php endif; ?>
-    
-    <a href="<?=  $base ?>/aspiration/index.php ?>" class="<?= active('<?=  $base ?>/aspiration/index.php ?>') ?>">Aspirasi</a>
-    
-    <a href="<?=  $base ?>/history/index.php ?>" class="<?= active('<?=  $base ?>/history/index.php ?>') ?>">Histori</a>
-    
+
+    <a href="<?= $base ?>/aspiration/index.php"
+       class="<?= activePath('/aspiration/') ?>">
+        Aspirasi
+    </a>
+
+    <a href="<?= $base ?>/history/index.php"
+       class="<?= activePath('/history/') ?>">
+        Histori
+    </a>
+
     <?php if ($role === 'admin'): ?>
-        <a href="<?=  $base ?>/user/index.php ?>" class="<?= active('<?=  $base ?>/student-user/index.php ?>') ?>">Siswa</a>
+        <a href="<?= $base ?>/student-user/index.php"
+           class="<?= activePath('/student-user/') ?>">
+            Siswa
+        </a>
     <?php endif; ?>
 
     <div class="text-center mt-4">
-        <a href="../../auth/logout.php" class="btn btn-danger btn-sm w-75">
+        <a href="<?= BASE_URL ?>/auth/logout.php"
+           class="btn btn-danger btn-sm w-75">
             Logout
         </a>
     </div>
 </div>
-
-<div class="main">
