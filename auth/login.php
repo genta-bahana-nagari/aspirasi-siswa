@@ -23,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit;
     }
 
-    echo "Invalid login credentials";
+    $error = "Invalid login credentials";
 }
 ?>
 
