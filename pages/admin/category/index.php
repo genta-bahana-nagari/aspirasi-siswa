@@ -9,46 +9,67 @@ $result = $stmt->get_result();
 $data = $result->fetch_all(MYSQLI_ASSOC);
 ?>
 
-<div class="p-6">
-    <h1 class="text-2xl font-bold mb-4">Kategori Aspirasi</h1>
+<div class="container-fluid">
 
-    <div class="flex justify-end mb-4">
-        <a href="create.php"
-        class="inline-flex items-center gap-2
-                bg-blue-600 hover:bg-blue-700
-                text-white px-4 py-2 rounded shadow">
-            <span class="text-lg">+</span>
-            <span>Buat Kategori</span>
+    <!-- Header -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h3 class="fw-bold mb-0">Kategori Aspirasi</h3>
+        <a href="create.php" class="btn btn-primary">
+            <i class="bi bi-plus-lg"></i> Buat Kategori
         </a>
     </div>
 
-    <table class="w-full bg-white border mt-4">
-        <thead class="bg-gray-100">
-            <tr>
-                <th class="p-2 border">No</th>
-                <th class="p-2 border">Nama Kategori</th>
-                <th class="p-2 border">Dibuat</th>
-                <th class="p-2 border">Aksi</th>
-            </tr>
-        </thead>
-        <tbody>
-        <?php foreach ($data as $i => $c): ?>
-            <tr>
-                <td class="p-2 border"><?= $i + 1 ?></td>
-                <td class="p-2 border"><?= htmlspecialchars($c['name']) ?></td>
-                <td class="p-2 border">
-                    <?= date('d-m-Y', strtotime($c['created_at'])) ?>
-                </td>
-                <td class="p-2 border text-center">
-                    <a href="edit.php?id=<?= $c['id'] ?>" class="text-blue-600 mr-2">Edit</a>
-                    <a href="delete.php?id=<?= $c['id'] ?>"
-                    onclick="return confirm('Apakah Anda yakin ingin menghapus kategori ini?');"
-                    class="text-red-600">Hapus</a>
-                </td>
-            </tr>
-        <?php endforeach; ?>
-        </tbody>
-    </table>
+    <!-- Card -->
+    <div class="card shadow-sm border-0">
+        <div class="card-body p-0">
+
+            <table class="table table-hover align-middle mb-0">
+                <thead class="table-light">
+                    <tr>
+                        <th style="width:60px;">No</th>
+                        <th>Nama Kategori</th>
+                        <th style="width:160px;">Dibuat</th>
+                        <th style="width:160px;" class="text-center">Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <?php foreach ($data as $i => $c): ?>
+                    <tr>
+                        <td><?= $i + 1 ?></td>
+                        <td class="fw-semibold">
+                            <?= htmlspecialchars($c['name']) ?>
+                        </td>
+                        <td>
+                            <span class="badge bg-secondary">
+                                <?= date('d-m-Y', strtotime($c['created_at'])) ?>
+                            </span>
+                        </td>
+                        <td class="text-center">
+                            <a href="edit.php?id=<?= $c['id'] ?>"
+                               class="btn btn-sm btn-warning me-1">
+                                Edit
+                            </a>
+                            <a href="delete.php?id=<?= $c['id'] ?>"
+                               onclick="return confirm('Yakin ingin menghapus kategori ini?');"
+                               class="btn btn-sm btn-danger">
+                                Hapus
+                            </a>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+
+                <?php if (empty($data)): ?>
+                    <tr>
+                        <td colspan="4" class="text-center text-muted py-4">
+                            Belum ada kategori
+                        </td>
+                    </tr>
+                <?php endif; ?>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
 </div>
 
 <?php include "../../../includes/footer.php"; ?>

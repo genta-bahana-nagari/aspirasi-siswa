@@ -6,18 +6,42 @@ require '../../../config/db.php';
 <?php include '../../../includes/header.php'; ?>
 <?php include '../../../includes/sidebar.php'; ?>
 
-<div class="p-6 max-w-xl">
-    <h1 class="text-2xl font-bold mb-4">Buat Kategori</h1>
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
 
-    <form action="store.php" method="POST" class="space-y-4">
-        <input type="text" name="name" required
-               placeholder="Nama Kategori"
-               class="w-full border p-2 rounded">
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-white fw-bold">
+                    Buat Kategori
+                </div>
 
-        <button class="bg-blue-600 text-white px-4 py-2 rounded">
-            Kirim
-        </button>
-    </form>
+                <div class="card-body">
+                    <form action="store.php" method="POST">
+
+                        <div class="mb-3">
+                            <label class="form-label">Nama Kategori</label>
+                            <input type="text"
+                                   name="name"
+                                   class="form-control"
+                                   placeholder="Masukkan nama kategori"
+                                   required>
+                        </div>
+
+                        <div class="d-flex justify-content-between">
+                            <a href="index.php" class="btn btn-secondary">
+                                Kembali
+                            </a>
+                            <button type="submit" class="btn btn-primary">
+                                Simpan
+                            </button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
 </div>
 
 <?php include '../../../includes/footer.php'; ?>

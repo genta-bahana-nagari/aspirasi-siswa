@@ -4,39 +4,56 @@ require_once __DIR__ . '/../../../config/db.php';
 
 $id = (int)$_GET['id'];
 
-$stmt = $conn->prepare("
-    SELECT * FROM categories
-    WHERE id = ?
-");
+$stmt = $conn->prepare("SELECT * FROM categories WHERE id = ?");
 $stmt->bind_param("i", $id);
 $stmt->execute();
 $result = $stmt->get_result();
 $data = $result->fetch_assoc();
 
 if (!$data) {
-    die("Kategori tidak bisa diedit.");
+    die("Kategori tidak ditemukan.");
 }
-$result = $conn->query("SELECT * FROM categories ORDER BY name ASC");
-$categories = $result->fetch_all(MYSQLI_ASSOC);
 ?>
 
 <?php include '../../../includes/header.php'; ?>
 <?php include '../../../includes/sidebar.php'; ?>
 
-<div class="p-6 max-w-xl">
-    <h1 class="text-2xl font-bold mb-4">Edit Kategori</h1>
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
 
-    <form action="update.php" method="POST" class="space-y-4">
-        <input type="hidden" name="id" value="<?= $data['id'] ?>">
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-white fw-bold">
+                    Edit Kategori
+                </div>
 
-        <input type="text" name="name" required
-               value="<?= htmlspecialchars($data['name']) ?>"
-               class="w-full border p-2 rounded">
+                <div class="card-body">
+                    <form action="update.php" method="POST">
+                        <input type="hidden" name="id" value="<?= $data['id'] ?>">
 
-        <button class="bg-blue-600 text-white px-4 py-2 rounded">
-            Update
-        </button>
-    </form>
+                        <div class="mb-3">
+                            <label class="form-label">Nama Kategori</label>
+                            <input type="text"
+                                   name="name"
+                                   value="<?= htmlspecialchars($data['name']) ?>"
+                                   class="form-control"
+                                   required>
+                        </div>
+
+                        <div class="d-flex justify-content-between">
+                            <a href="index.php" class="btn btn-secondary">
+                                Kembali
+                            </a>
+                            <button type="submit" class="btn btn-primary">
+                                Update
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
 </div>
 
 <?php include '../../../includes/footer.php'; ?>
