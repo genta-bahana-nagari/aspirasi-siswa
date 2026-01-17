@@ -41,10 +41,19 @@ function activePath($path)
         Aspirasi
     </a>
 
+    <?php if ($role === 'student'): ?>
     <a href="<?= $base ?>/history/index.php"
        class="<?= activePath('/history/') ?>">
         Histori
     </a>
+    <?php endif; ?>
+    
+    <?php if ($role === 'admin'): ?>
+        <a href="<?= $base ?>/feedback/index.php"
+           class="<?= activePath('/feedback/') ?>">
+            Feedback
+        </a>
+    <?php endif; ?>
 
     <?php if ($role === 'admin'): ?>
         <a href="<?= $base ?>/student-user/index.php"
