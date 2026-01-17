@@ -80,12 +80,7 @@ aspirasi-siswa/
 │   │   │   ├── create.php
 │   │   │   └── edit.php
 │   │   │
-│   │   ├── feedback/           # Modul Feedback
-│   │   │   ├── index.php
-│   │   │   ├── create.php
-│   │   │   └── edit.php
-│   │   │
-│   │   └── pengguna/           # Modul Pengguna / Siswa
+│   │   └── feedback/           # Modul Feedback
 │   │       ├── index.php
 │   │       ├── create.php
 │   │       └── edit.php
@@ -98,7 +93,7 @@ aspirasi-siswa/
 │       │   ├── create.php
 │       │   └── edit.php
 │       │
-│       └── histori/            # Riwayat aspirasi siswa
+│       └── progress/           # Riwayat aspirasi siswa (berupa card)
 │           └── index.php
 │
 ├── assets/                     # File statis
