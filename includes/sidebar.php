@@ -55,13 +55,6 @@ function activePath($path)
         </a>
     <?php endif; ?>
 
-    <!-- <?php if ($role === 'admin'): ?>
-        <a href="<?= $base ?>/student-user/index.php"
-           class="<?= activePath('/student-user/') ?>">
-            Siswa
-        </a>
-    <?php endif; ?> -->
-
     <div class="text-center mt-4">
         <a href="<?= BASE_URL ?>/auth/logout.php"
            class="btn btn-danger btn-sm w-75">
