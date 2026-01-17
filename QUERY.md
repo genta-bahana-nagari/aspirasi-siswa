@@ -64,15 +64,9 @@ CREATE TABLE aspiration_feedbacks (
     admin_id INT NOT NULL,
     title VARCHAR(255) NOT NULL,
     feedback TEXT NOT NULL,
-    status ENUM(
-        'Diproses',
-        'Dalam Perbaikan',
-        'Selesai'
-    ) NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT fk_aspirations_feedback
-        FOREIGN KEY (aspiration_id) REFERENCES users(id)
+        FOREIGN KEY (aspiration_id) REFERENCES aspirations(id)
         ON DELETE CASCADE,
 
     CONSTRAINT fk_feedback_admin

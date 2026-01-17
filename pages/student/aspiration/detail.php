@@ -4,14 +4,12 @@ require_once "../../../includes/auth_check.php";
 include "../../../includes/header.php";
 include "../../../includes/sidebar.php";
 
-// Cek apakah ada ID
 if (!isset($_GET['id'])) {
     die("ID aspirasi tidak ditemukan.");
 }
 
 $id = (int)$_GET['id'];
 
-// Ambil data aspirasi lengkap
 $stmt = $conn->prepare("
     SELECT a.*, u.name AS siswa, c.name AS kategori
     FROM aspirations a
@@ -28,6 +26,17 @@ $aspirasi = $result->fetch_assoc();
 if (!$aspirasi) {
     die("Aspirasi tidak ditemukan.");
 }
+
+$feedbackStmt = $conn->prepare("
+    SELECT af.*, u.name AS admin_name
+    FROM aspiration_feedbacks af
+    JOIN users u ON af.admin_id = u.id
+    WHERE af.aspiration_id = ?
+    ORDER BY af.id DESC
+");
+$feedbackStmt->bind_param("i", $id);
+$feedbackStmt->execute();
+$feedbacks = $feedbackStmt->get_result();
 ?>
 
 <div class="main">
@@ -105,6 +114,53 @@ if (!$aspirasi) {
                         </a>
                     <?php endif; ?>
                 </div>
+            </div>
+        </div>
+
+        <div class="card shadow-sm border-0 mt-4">
+            <div class="card-header bg-white fw-bold">
+                Feedback Admin
+            </div>
+
+            <div class="card-body">
+
+                <?php if ($feedbacks->num_rows === 0): ?>
+                    <!-- Fallback -->
+                    <div class="text-center text-muted py-4">
+                        <i class="bi bi-chat-square-text fs-1 mb-2 d-block"></i>
+                        <p class="mb-0">Belum ada feedback dari admin.</p>
+                    </div>
+                <?php else: ?>
+                    <?php while ($fb = $feedbacks->fetch_assoc()): ?>
+                        <div class="border rounded p-3 mb-3">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <div>
+                                    <h6 class="mb-1 fw-bold">
+                                        <?= htmlspecialchars($fb['title']) ?>
+                                    </h6>
+                                    <small class="text-muted">
+                                        Oleh <?= htmlspecialchars($fb['admin_name']) ?>
+                                    </small>
+                                </div>
+
+                                <?php if ($_SESSION['role'] === 'admin'): ?>
+                                    <a href="../feedback/delete.php?id=<?= $fb['id'] ?>"
+                                    onclick="return confirm('Hapus feedback ini?')"
+                                    class="btn btn-sm btn-outline-danger">
+                                        <i class="bi bi-trash"></i>
+                                    </a>
+                                <?php endif; ?>
+                            </div>
+
+                            <hr class="my-2">
+
+                            <p class="mb-0">
+                                <?= nl2br(htmlspecialchars($fb['feedback'])) ?>
+                            </p>
+                        </div>
+                    <?php endwhile; ?>
+                <?php endif; ?>
+
             </div>
         </div>
     </div>

@@ -42,9 +42,9 @@ function activePath($path)
     </a>
 
     <?php if ($role === 'student'): ?>
-    <a href="<?= $base ?>/history/index.php"
-       class="<?= activePath('/history/') ?>">
-        Histori
+    <a href="<?= $base ?>/progress/index.php"
+       class="<?= activePath('/progress/') ?>">
+        Proses Aspirasi
     </a>
     <?php endif; ?>
     
@@ -55,12 +55,12 @@ function activePath($path)
         </a>
     <?php endif; ?>
 
-    <?php if ($role === 'admin'): ?>
+    <!-- <?php if ($role === 'admin'): ?>
         <a href="<?= $base ?>/student-user/index.php"
            class="<?= activePath('/student-user/') ?>">
             Siswa
         </a>
-    <?php endif; ?>
+    <?php endif; ?> -->
 
     <div class="text-center mt-4">
         <a href="<?= BASE_URL ?>/auth/logout.php"
