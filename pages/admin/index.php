@@ -150,8 +150,8 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
                 <div class="card text-center h-100">
                     <div class="card-body d-flex flex-column justify-content-center">
                         <i class="bi bi-person-plus-fill fs-1 mb-3 text-primary"></i>
-                        <h5 class="card-title">Tambah Siswa Baru</h5>
-                        <a href="students/create.php" class="btn btn-primary mt-2">Tambah Siswa</a>
+                        <h5 class="card-title">Lihat Aspirasi Siswa</h5>
+                        <a href="aspiration/index.php" class="btn btn-primary mt-2">Lihat Aspirasi</a>
                     </div>
                 </div>
             </div>
@@ -160,7 +160,7 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
                     <div class="card-body d-flex flex-column justify-content-center">
                         <i class="bi bi-plus-square-fill fs-1 mb-3 text-success"></i>
                         <h5 class="card-title">Tambah Kategori Baru</h5>
-                        <a href="categories/create.php" class="btn btn-success mt-2">Tambah Kategori</a>
+                        <a href="category/create.php" class="btn btn-success mt-2">Tambah Kategori</a>
                     </div>
                 </div>
             </div>
@@ -168,8 +168,8 @@ $data = $result->fetch_all(MYSQLI_ASSOC);
                 <div class="card text-center h-100">
                     <div class="card-body d-flex flex-column justify-content-center">
                         <i class="bi bi-journal-text fs-1 mb-3 text-warning"></i>
-                        <h5 class="card-title">Ajukan Aspirasi</h5>
-                        <a href="aspirations/create.php" class="btn btn-warning mt-2">Ajukan</a>
+                        <h5 class="card-title">Beri Feedback</h5>
+                        <a href="feedback/create.php" class="btn btn-warning mt-2">Beri Feedback</a>
                     </div>
                 </div>
             </div>
